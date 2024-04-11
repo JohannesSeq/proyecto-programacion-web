@@ -10,5 +10,5 @@ import titoxgamestore.Proyecto.domain.reparacion;
 
 public interface reparacionService {
 
-   public List<reparacion> getreparacion(boolean activos);
+   public static List<reparacion> getreparacion(boolean activos);
 }

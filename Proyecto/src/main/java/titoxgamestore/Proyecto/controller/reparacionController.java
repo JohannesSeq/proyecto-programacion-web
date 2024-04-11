@@ -18,6 +18,7 @@ public class reparacionController {
     
     public String inicio(Model model){
         var reparaciones = reparacionService.getreparacion(false);
-                }
-    
+
+        return null;
+    }
 }
