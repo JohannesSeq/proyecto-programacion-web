@@ -16,8 +16,9 @@ public class reparacion implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="nombre")
-    private String nombre;
+    @Column(name="reparacion_id")
+    private long reparacion_id;
+    private long nombre;
     private String apellido;
     private String correo_electronico ;
     private long fecha;
@@ -29,7 +30,8 @@ public class reparacion implements Serializable{
     
     
 
-    public reparacion(String nombre, String apellido, String correo_electronico, long fecha, String Detalles_Reparacion, boolean activo) {
+    public reparacion(long reparacion_id,long nombre, String apellido, String correo_electronico, long fecha, String Detalles_Reparacion, boolean activo) {
+        this.reparacion_id = reparacion_id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo_electronico = correo_electronico;

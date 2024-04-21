@@ -27,7 +27,7 @@ public class catalogoController {
     
      @GetMapping("/nuevo")
     public String CatalogoNuevo(catalogo catalogo) {
-        return "/condominio/modifica";
+        return "/catalogo/modifica";
     }
 
     @PostMapping("/guardar")
