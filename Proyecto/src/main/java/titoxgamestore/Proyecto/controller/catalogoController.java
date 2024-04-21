@@ -13,6 +13,7 @@ import titoxgamestore.Proyecto.domain.catalogo;
 @Controller
 @RequestMapping("/catalogo")
 public class catalogoController {
+
     @Autowired
     private catalogoService catalogoService;
     
