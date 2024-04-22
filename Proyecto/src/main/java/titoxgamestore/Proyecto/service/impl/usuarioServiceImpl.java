@@ -60,9 +60,9 @@ public class usuarioServiceImpl implements usuarioService {
     @Transactional
     public void save(usuarios usuario, boolean crearRolUser) {
         usuario = usuariosDao.save(usuario);
-        if (crearRolUser) {  // If creating the user, create the default role "USER"
+        if (crearRolUser) {
             rol Rol = new rol();
-            Rol.setNombre("ROLE_USER");
+            Rol.setNombre("USER");
             Rol.setIdUsuario(usuario.getIdUsuario());
             roldao.save(Rol);
         }

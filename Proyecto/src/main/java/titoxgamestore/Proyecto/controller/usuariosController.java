@@ -36,10 +36,10 @@ public class usuariosController {
 
 
     @PostMapping("/guardar")
-    public String usuarioGuardar(usuarios usuario, @RequestParam("imagenFile") MultipartFile imagenFile) {
+    public String usuarioGuardar(usuarios usuario) {
 
         UsuarioService.save(usuario,true);
-        return "redirect:/usuario/listado";
+        return "redirect:/";
     }
 
     @GetMapping("/eliminar/{idUsuario}")

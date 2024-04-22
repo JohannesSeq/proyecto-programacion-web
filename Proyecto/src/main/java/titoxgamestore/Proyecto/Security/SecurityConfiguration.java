@@ -35,28 +35,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         return slr;
     }
 
-    /* localeChangeInterceptor se utiliza para crear un interceptor de cambio de idioma*/
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        var lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
-        return lci;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registro) {
-        registro.addInterceptor(localeChangeInterceptor());
-    }
-
-    //Bean para poder acceder a los Messages.properties en código...
-    @Bean("messageSource")
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource= new ResourceBundleMessageSource();
-        messageSource.setBasenames("messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
-    }
-
     /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -72,7 +50,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/","/index","/errores/**",
                                 "/catalogo/**","/reparaciones/**","/reportes/**",
-                                "/registro**","/usuario**","/login**","/scripts/**","/style/**","/webjars/**","/assets/**")
+                                "/registro/**","/usuario/**","/login**","/scripts/**","/style/**","/webjars/**","/assets/**")
                         .permitAll()
                         .requestMatchers(
                                 "/producto/nuevo","/producto/guardar",
