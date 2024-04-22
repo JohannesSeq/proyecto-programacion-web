@@ -24,11 +24,11 @@
     <header th:replace="~{layout/plantilla :: header}"/>
     <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
         <div class="card">
-            <form class="card-body" th:action="@{/templates/login}" method="post">
+            <form class="card-body" th:action="@{/login}" method="post">
                 <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="text" class="form-control" id="email" name="usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                 </div>
                 <div class="form-group" style="margin-bottom: 10px">
-                    <a href="/signup">¿No tienes cuenta? Regístrate</a>
+                    <a th:href="@{/registro/Registro}">¿No tienes cuenta? Regístrate</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
