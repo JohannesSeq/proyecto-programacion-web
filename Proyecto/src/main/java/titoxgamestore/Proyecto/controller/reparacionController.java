@@ -13,6 +13,8 @@ import titoxgamestore.Proyecto.service.impl.CustomUserDetails;
 import titoxgamestore.Proyecto.service.reparacionService;
 import titoxgamestore.Proyecto.domain.reparacion;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/reparaciones")
 public class reparacionController {
@@ -25,12 +27,11 @@ public class reparacionController {
         return "/reparaciones/FormReparaciones";
     }
 
-    @GetMapping("/listado")
-    private String listado(Model model){
-        var reparacion = reparacionservice.getreparacion(false);
-        model.addAttribute("reparacion", reparacion);
-        model.addAttribute("totalreparacion",reparacion.size());
-        return "/reparaciones/listado";
+    @GetMapping("/listaAdministrador")
+    public String listaAdministrador(Model model){
+        List<reparacion> todasReparaciones = reparacionservice.getreparacion(false);
+        model.addAttribute("reparaciones", todasReparaciones);  // This should match what's used in Thymeleaf.
+        return "reparaciones/listaAdministrador";  // Ensure the view name is correct.
     }
     
     @GetMapping("/nuevo")
@@ -50,7 +51,7 @@ public class reparacionController {
     @GetMapping("/eliminar/{reparacion_id}")
     public String reparacionEliminar(reparacion reparacion) {
         reparacionservice.delete(reparacion);
-        return "redirect:/reparaciones/listado";
+        return "redirect:/reparaciones/listaAdministrador";
     }
     
     

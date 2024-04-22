@@ -3,10 +3,8 @@ package titoxgamestore.Proyecto.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import titoxgamestore.Proyecto.service.catalogoService;
 import titoxgamestore.Proyecto.domain.catalogo;
 
@@ -24,23 +22,23 @@ public class catalogoController {
     public String listado(@RequestParam(name = "filtro", required = false, defaultValue = "all") String filtro, Model model) {
         List<catalogo> catalogo;
         if (filtro == null || filtro.equals("all")) {
-            catalogo = catalogoService.getcatalogo(false); // Get all catalogo items without any filter
+            catalogo = catalogoService.getcatalogo(false);
         } else {
-            catalogo = catalogoService.getFilterCatalogo(filtro); // Get filtered catalogo items
+            catalogo = catalogoService.getFilterCatalogo(filtro);
         }
         model.addAttribute("catalogoItems", catalogo);
         model.addAttribute("totalCatalogo", catalogo.size());
-        model.addAttribute("currentFilter", filtro); // Pass the current filter back to the view
+        model.addAttribute("currentFilter", filtro);
         return "catalogo/Catalogo";
     }
 
     @GetMapping("/CatalogoAdministrador")
     public String listadoAdministrador(Model model) {
-        List<catalogo> catalogo = catalogoService.getcatalogo(false); // Get all catalogo items without any filter
+        List<catalogo> catalogo = catalogoService.getcatalogo(false);
 
         model.addAttribute("catalogoItems", catalogo);
         model.addAttribute("totalCatalogo", catalogo.size());
-        model.addAttribute("catalogo", new catalogo()); // Ensure a catalogo object is available for the form
+        model.addAttribute("catalogo", new catalogo());
         return "catalogo/listaCatalogoAdministrador";
     }
     
@@ -61,11 +59,20 @@ public class catalogoController {
         return "redirect:/catalogo/Catalogo";
     }
 
-    @GetMapping("/modificar/{id_catalogo}")
-    public String mostrarcatalogoModificar(catalogo catalogo, Model model) {
-        catalogo = catalogoService.getcatalogo(catalogo);
-        model.addAttribute("catalogo", catalogo);
-        return "/catalogo/modifica";
+    @PostMapping("/modificar")
+    public String modificarCatalogo(@ModelAttribute("catalogo") catalogo catalogo, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("catalogo", catalogo);
+            return "/catalogo/modifica"; // Redirect back to modification page if there are form errors
+        }
+
+        try {
+            catalogoService.update(catalogo); // Assuming this method checks if ID is present and throws IllegalArgumentException if not
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "/catalogo/modifica"; // Redirect back to modification page if there are service errors
+        }
+        return "redirect:/catalogo/CatalogoAdministrador"; // Redirect after successful update
     }
 
     @GetMapping("/modificar/{id_catalogo}")

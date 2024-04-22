@@ -12,16 +12,32 @@ footer {
     background-color: #0E2844;
 }
 .custom-carousel-container .carousel-inner {
-    height: 500px; /* This sets the height of the carousel. */
+    height: 500px;
 }
 
 .custom-carousel-container .carousel-inner img {
-    height: 100%; /* This will make the image fill the container height. */
+    height: 100%;
 }
 
 .imagenes {
     width: 100%;
     height: 500px;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
 }
 
 @media (max-width: 991px) {

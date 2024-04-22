@@ -57,6 +57,15 @@ public class catalogoServiceImpl implements catalogoService{
         catalogodao.save(catalogo);
     }
 
+    @Transactional
+    @Override
+    public void update(catalogo catalogo) {
+        if (catalogo != null && catalogo.getId_catalogo() != null) {
+            catalogodao.save(catalogo); // save method on JPA repository works for both save and update
+        } else {
+            throw new IllegalArgumentException("Catalogo must have an id for update operations");
+        }
+    }
     
     @Transactional
     @Override

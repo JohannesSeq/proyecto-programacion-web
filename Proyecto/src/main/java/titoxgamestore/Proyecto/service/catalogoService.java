@@ -11,5 +11,8 @@ public interface catalogoService {
     public catalogo getcatalogo(catalogo catalogo);
 
     public void save(catalogo catalogo);
+
+    void update(catalogo catalogo); // Add this if implementing an explicit update method
+
     public void delete(catalogo catalogo);
 }
