@@ -20,10 +20,6 @@ public class usuariosController {
         return "/usuario/login";
     }
 
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        return "/usuario/signup";
-    }
 
     @GetMapping("/listado")
     public String listado(Model model) {
