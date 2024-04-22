@@ -50,23 +50,19 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/","/index","/error/**",
-                                "/catalogo/**","/reparaciones/**","/reportes/**",
+                                "/catalogo/**","/reparaciones/mostrarForm","/reportes/**",
                                 "/registro/**","/usuario/**","/login**","/scripts/**","/style/**","/webjars/**","/assets/**")
                         .permitAll()
                         .requestMatchers(
-                                "/producto/nuevo","/producto/guardar",
-                                "/producto/modificar/**","/producto/eliminar/**",
-                                "/categoria/nuevo","/categoria/guardar",
-                                "/categoria/modificar/**","/categoria/eliminar/**",
-                                "/reportes/**"
+                                "/reparaciones/listaAdministrador",
+                                "/reparaciones/modifica",
+                                "/producto/**"
                         ).hasRole("ADMIN")
                         .requestMatchers(
-                                "/producto/listado",
-                                "/categoria/listado"
-                        ).hasAnyRole("ADMIN", "VENDEDOR")
-                        .requestMatchers("/facturar/carrito",
+                                "/usuario/listadoReparaciones",
+                                "/reparaciones/porEmail",
                                 "/carrito/**")
-                        .hasRole("USER")
+                        .hasAnyRole("USER","ADMIN")
                 )
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll())
