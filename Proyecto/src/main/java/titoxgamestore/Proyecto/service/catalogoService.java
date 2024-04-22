@@ -6,6 +6,8 @@ import java.util.List;
 public interface catalogoService {
     public List<catalogo> getcatalogo(boolean activo);
 
+    public List<catalogo> getFilterCatalogo(String filtro);
+
     public catalogo getcatalogo(catalogo catalogo);
 
     public void save(catalogo catalogo);

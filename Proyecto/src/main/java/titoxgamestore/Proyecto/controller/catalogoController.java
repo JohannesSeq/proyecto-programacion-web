@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import titoxgamestore.Proyecto.service.catalogoService;
 import titoxgamestore.Proyecto.domain.catalogo;
+
+import java.util.List;
 
 
 @Controller
@@ -16,13 +19,19 @@ public class catalogoController {
 
     @Autowired
     private catalogoService catalogoService;
-    
+
     @GetMapping("/Catalogo")
-    private String listado(Model model) {
-        var catalogo = catalogoService.getcatalogo(false);
+    public String listado(@RequestParam(name = "filtro", required = false, defaultValue = "all") String filtro, Model model) {
+        List<catalogo> catalogo;
+        if (filtro == null || filtro.equals("all")) {
+            catalogo = catalogoService.getcatalogo(false); // Get all catalogo items without any filter
+        } else {
+            catalogo = catalogoService.getFilterCatalogo(filtro); // Get filtered catalogo items
+        }
         model.addAttribute("catalogoItems", catalogo);
-        model.addAttribute("totalCatalogo",catalogo.size());
-        return "/catalogo/Catalogo";
+        model.addAttribute("totalCatalogo", catalogo.size());
+        model.addAttribute("currentFilter", filtro); // Pass the current filter back to the view
+        return "catalogo/Catalogo";
     }
     
      @GetMapping("/nuevo")

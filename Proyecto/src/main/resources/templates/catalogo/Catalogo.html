@@ -16,14 +16,12 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="filter">filtrar por:</label>
-                    <select id="filter" class="form-control" onchange="filterItems()">
-                        <option value="all">Todos</option>
-                        <option value="newGames">Juegos Nuevos</option>
-                        <option value="usedGames">Juegos Usados</option>
-                        <option value="newConsoles">Consolas Nuevas</option>
-                        <option value="usedConsoles">Consolas Usadas</option>
-                        <option value="games">Solo Videojuegos</option>
-                        <option value="consoles">Solo Consolas</option>
+                    <select id="filter" class="form-control">
+                        <option value="all" th:selected="${currentFilter == 'all'}">Todos</option>
+                        <option value="videojuego" th:selected="${currentFilter == 'videojuego'}">Juegos Nuevos</option>
+                        <option value="videojuego_usado" th:selected="${currentFilter == 'videojuego_usado'}">Juegos Usados</option>
+                        <option value="consola" th:selected="${currentFilter == 'consola'}">Consolas Nuevas</option>
+                        <option value="consola_usada" th:selected="${currentFilter == 'consola_usada'}">Consolas Usadas</option>
                     </select>
                 </div>
             </div>
@@ -49,5 +47,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('filter').addEventListener('change', function() {
+            window.location.href = '/catalogo/Catalogo?filtro=' + this.value;
+        });
+    </script>
+
+
 </body>
 </html>
