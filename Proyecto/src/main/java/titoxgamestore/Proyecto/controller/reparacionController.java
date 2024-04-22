@@ -2,11 +2,14 @@
 package titoxgamestore.Proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import titoxgamestore.Proyecto.service.impl.CustomUserDetails;
 import titoxgamestore.Proyecto.service.reparacionService;
 import titoxgamestore.Proyecto.domain.reparacion;
 
@@ -56,6 +59,16 @@ public class reparacionController {
         reparacion = reparacionservice.getreparacion(reparacion);
         model.addAttribute("catalogo", reparacion);
         return "/reparaciones/modifica";
+    }
+
+    @GetMapping("/porEmail")
+    public String getReparacionesPorEmail(Model model, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String email = userDetails.getEmail();
+
+        var reparaciones = reparacionservice.getreparacionPorEmail(email);
+        model.addAttribute("reparaciones", reparaciones);
+        return "usuario/listadoReparaciones";
     }
     
     
