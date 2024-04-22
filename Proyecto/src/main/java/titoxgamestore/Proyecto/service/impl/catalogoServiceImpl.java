@@ -33,12 +33,23 @@ public class catalogoServiceImpl implements catalogoService{
         }
         return lista;
     }
+    @Transactional(readOnly = true)
+    @Override
+    public List<catalogo> getFilterCatalogo(String filtro) {
+        if (filtro == null || filtro.equals("all")) {
+            return catalogodao.findAll(); // Use the correct instance variable name
+        } else {
+            return catalogodao.findByTipoArticulo(filtro); // Use the correct instance variable name
+        }
+    }
 
     @Transactional(readOnly = true)
     @Override
     public catalogo getcatalogo(catalogo catalogo) {
         return catalogodao.findById(catalogo.getId_catalogo()).orElse(null);
     }
+
+
 
     @Transactional
     @Override

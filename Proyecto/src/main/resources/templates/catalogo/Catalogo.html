@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="~{layout/plantilla :: head}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game and Console Catalog</title>
@@ -9,72 +9,51 @@
     <link rel="stylesheet" href="../../static/style/main.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid justify-content-between">
-              <a class="navbar-brand" href="../index.html">TITOX STORE</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse menuItems" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../reparaciones/FormReparaciones.html">Reparaciones</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Catalogo
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="Catalogo.html">Videojuegos</a></li>
-                      <li><a class="dropdown-item" href="Catalogo.html">Consolas</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="Catalogo.html">Videojuegos usados</a></li>
-                    </ul>
-                  </li>
-                  <!-- User dropdown for login/signup -->
-                  <li class="nav-item dropdown me-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Usuario
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
-                      <li><a class="dropdown-item" href="../usuarios/login.html">Iniciar Sesión</a></li>
-                      <li><a class="dropdown-item" href="../usuarios/signup.html">Registrarse</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-    </header>
+    <header th:replace="~{layout/plantilla :: header}"/>
     <div class="container mt-4">
         <h1 class="mb-3">Catalogo de VideoJuegos</h1>
         <div class="row mb-3">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="filter">filtrar por:</label>
-                    <select id="filter" class="form-control" onchange="filterItems()">
-                        <option value="all">All</option>
-                        <option value="newGames">New Games</option>
-                        <option value="usedGames">Used Games</option>
-                        <option value="newConsoles">New Consoles</option>
-                        <option value="usedConsoles">Used Consoles</option>
-                        <option value="games">Games Only</option>
-                        <option value="consoles">Consoles Only</option>
+                    <select id="filter" class="form-control">
+                        <option value="all" th:selected="${currentFilter == 'all'}">Todos</option>
+                        <option value="videojuego" th:selected="${currentFilter == 'videojuego'}">Juegos Nuevos</option>
+                        <option value="videojuego_usado" th:selected="${currentFilter == 'videojuego_usado'}">Juegos Usados</option>
+                        <option value="consola" th:selected="${currentFilter == 'consola'}">Consolas Nuevas</option>
+                        <option value="consola_usada" th:selected="${currentFilter == 'consola_usada'}">Consolas Usadas</option>
                     </select>
                 </div>
             </div>
         </div>
         <div id="catalogItems" class="row">
-            <!-- Catalog items will be loaded here dynamically using backend -->
+            <div th:each="item : ${catalogoItems}" class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{${item.imagen_catalogo}}" class="card-img-top" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${item.titulo}">Card title</h5>
+                        <p class="card-text" th:text="${item.descripcion}">Some quick example text...</p>
+                        <a th:href="@{/product/details(item.id)}" class="btn btn-primary">Agregar al Carrito</a>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${catalogoItems.isEmpty()}" class="col-12 text-center">
+                <p>No hay catalogo a mostrar, estate atento para nuestras proximas adiciones.</p>
+            </div>
         </div>
     </div>
+    <footer th:replace="~{layout/plantilla :: footer}"/>
     <script src="../../static/scripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('filter').addEventListener('change', function() {
+            window.location.href = '/catalogo/Catalogo?filtro=' + this.value;
+        });
+    </script>
+
+
 </body>
 </html>

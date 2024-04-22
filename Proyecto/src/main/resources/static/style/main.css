@@ -6,6 +6,11 @@ body {
     margin-right: 70px;
 }
 
+footer {
+    margin: auto;
+    width: 100%;
+    background-color: #0E2844;
+}
 .custom-carousel-container .carousel-inner {
     height: 500px; /* This sets the height of the carousel. */
 }
