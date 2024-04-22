@@ -25,11 +25,10 @@
     <header th:replace="~{layout/plantilla :: header}"/>
 
     <div th:if=${param.exito}>
-        <div class="alert alert-info">Se ha registrado exitosamente a
-            la aplicación</div>
+        <div class="alert alert-info">Se ha creado la petición de reparación</div>
     </div>
 
-    <div class="container">
+    <div class="container" >
         <h2>Formulario de Reparaciones</h2>
         <form th:action="@{/reparaciones/guardar}" method="post">
             <div class="form-group">
@@ -55,7 +54,8 @@
             <button type="submit" class="btn btn-primary"  style="margin-top: 20px">Enviar</button>
         </form>
     </div>
-    <footer th:replace="~{layout/plantilla :: footer}"/>
+    <div id="content-wrap"></div>
+    <footer id="footer" th:replace="~{layout/plantilla :: footer}"/>
     <!-- Bootstrap JS and its dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

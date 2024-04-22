@@ -50,7 +50,7 @@ public class catalogoController {
     @PostMapping("/guardar")
     public String CatalogoGuardar(catalogo catalogo) {
         catalogoService.save(catalogo);
-        return "redirect:/catalogo/Catalogo";
+        return "redirect:/catalogo/Catalogo?exito";
     }
 
     @GetMapping("/eliminar/{id_catalogo}")

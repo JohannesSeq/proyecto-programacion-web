@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="../../static/style/main.css">
 </head>
 <body>
+
     <header th:replace="~{layout/plantilla :: header}"/>
+    <div th:if=${param.exito}>
+        <div class="alert alert-info">Se ha agregado un nuevo producto</div>
+    </div>
     <div class="container mt-4">
         <h1 class="mb-3">Catalogo de VideoJuegos</h1>
         <div class="row mb-3">
@@ -49,7 +53,8 @@
     <div class="container d-flex align-items-center justify-content-center mb-4 mt-4">
         <a th:href="@{/carrito/verCarrito}" class="btn btn-secondary mt-2">Ver Carrito</a>
     </div>
-        <footer th:replace="~{layout/plantilla :: footer}"/>
+    <div id="content-wrap"></div>
+        <footer id="footer" th:replace="~{layout/plantilla :: footer}"/>
     <script src="../../static/scripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
