@@ -40,7 +40,7 @@ public class reparacionController {
     public String reparacionGuardar(reparacion reparacion) {
         reparacion.setActivo(true);
         reparacionservice.save(reparacion);
-        return "redirect:/reparaciones/FormReparaciones";
+        return "redirect:/reparaciones/mostrarForm?exito";
     }
     
     
