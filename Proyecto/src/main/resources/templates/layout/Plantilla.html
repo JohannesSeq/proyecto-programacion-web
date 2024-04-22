@@ -71,10 +71,15 @@
 
                                 <!-- Display these additional items only if the user is authenticated and has the role 'ADMIN' -->
                                 <li sec:authorize="isAuthenticated() and hasRole('ADMIN')">
-                                    <a class="dropdown-item" th:href="@{/catalogo/gestionar}">Gestionar catalogo</a>
+                                    <a class="dropdown-item" th:href="@{/catalogo/CatalogoAdministrador}">Gestionar catalogo</a>
                                 </li>
                                 <li sec:authorize="isAuthenticated() and hasRole('ADMIN')">
                                     <a class="dropdown-item" th:href="@{/reparaciones/porEmail}">Gestionar reparaciones</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+                                    <form method="post" th:action="@{/logout}">
+                                        <button class="dropdown-item">Cerrar Sesion</button>
+                                    </form>
                                 </li>
                             </ul>
                         </li>

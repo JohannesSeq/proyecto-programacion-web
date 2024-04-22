@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Administrar Catálogo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+
 <body>
+<header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container mt-3">
+        <h2>Administrar Catálogo</h2>
+        <!-- Form to add or modify catalog items -->
+        <form th:action="@{/catalogo/guardar}" th:object="${catalogo}" method="post">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título:</label>
+                <input type="text" id="titulo" th:field="*{titulo}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{titulo}" class="invalid-feedback">Por favor, ingrese un título válido.</div>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <input type="text" id="descripcion" th:field="*{descripcion}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{descripcion}" class="invalid-feedback">Por favor, ingrese una descripción.</div>
+            </div>
+            <div class="mb-3">
+                <label for="tipoArticulo" class="form-label">Tipo de Artículo:</label>
+                <input type="text" id="tipoArticulo" th:field="*{tipoArticulo}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{tipoArticulo}" class="invalid-feedback">Por favor, ingrese un tipo de artículo.</div>
+            </div>
+            <div class="mb-3">
+                <label for="imagen_catalogo" class="form-label">URL Imagen:</label>
+                <input type="text" id="imagen_catalogo" th:field="*{imagen_catalogo}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{tipoArticulo}" class="invalid-feedback">Por favor, ingrese un tipo de artículo.</div>
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" id="precio" th:field="*{precio}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{precio}" class="invalid-feedback">Por favor, ingrese un precio.</div>
+            </div>
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input type="number" id="cantidad" th:field="*{cantidad}" class="form-control" th:errorclass="is-invalid">
+                <div th:error="*{cantidad}" class="invalid-feedback">Por favor, ingrese una cantidad.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+
+        <!-- Table to display catalog items -->
+        <table class="table table-striped mt-4">
+            <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Tipo de Artículo</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${catalogoItems}">
+                <td th:text="${item.titulo}"></td>
+                <td th:text="${item.descripcion}"></td>
+                <td th:text="${item.tipoArticulo}"></td>
+                <td th:text="${item.precio}"></td>
+                <td th:text="${item.cantidad}"></td>
+                <td>
+                    <a th:href="@{/catalogo/modificar/{id}(id=${item.id_catalogo})}" class="btn btn-info">Modificar</a>
+                    <a th:href="@{/catalogo/eliminar/{id}(id=${item.id_catalogo})}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -33,6 +33,16 @@ public class catalogoController {
         model.addAttribute("currentFilter", filtro); // Pass the current filter back to the view
         return "catalogo/Catalogo";
     }
+
+    @GetMapping("/CatalogoAdministrador")
+    public String listadoAdministrador(Model model) {
+        List<catalogo> catalogo = catalogoService.getcatalogo(false); // Get all catalogo items without any filter
+
+        model.addAttribute("catalogoItems", catalogo);
+        model.addAttribute("totalCatalogo", catalogo.size());
+        model.addAttribute("catalogo", new catalogo()); // Ensure a catalogo object is available for the form
+        return "catalogo/listaCatalogoAdministrador";
+    }
     
      @GetMapping("/nuevo")
     public String CatalogoNuevo(catalogo catalogo) {
@@ -49,6 +59,13 @@ public class catalogoController {
     public String catalogoEliminar(catalogo catalogo) {
         catalogoService.delete(catalogo);
         return "redirect:/catalogo/Catalogo";
+    }
+
+    @GetMapping("/modificar/{id_catalogo}")
+    public String mostrarcatalogoModificar(catalogo catalogo, Model model) {
+        catalogo = catalogoService.getcatalogo(catalogo);
+        model.addAttribute("catalogo", catalogo);
+        return "/catalogo/modifica";
     }
 
     @GetMapping("/modificar/{id_catalogo}")

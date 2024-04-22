@@ -6,26 +6,31 @@
 </head>
 <body>
 <header th:replace="~{layout/plantilla :: header}"/>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Producto</th>
-        <th>Precio Unitario</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="reparacion : ${reparaciones}">
-        <td th:text="${reparacion.producto}"></td>
-        <td th:text="${reparacion.precio}"></td>
-        <td th:text="${reparacion.cantidad}"></td>
-        <td th:text="${reparacion.subtotal}"></td>
-        <td><button type="button" class="btn btn-primary">Acción</button></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>Email</th>
+            <th>Fecha de Reparación</th>
+            <th>Detalles de la Reparación</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reparacion : ${reparaciones}">
+            <td th:text="${reparacion.nombre} + ' ' + ${reparacion.apellido}">Nombre Completo</td>
+            <td th:text="${reparacion.correoElectronico}">Email</td>
+            <td th:text="${#dates.format(reparacion.fecha, 'yyyy-MM-dd')}">Fecha</td>
+            <td th:text="${reparacion.Detalles_Reparacion}">Detalles</td>
+            <td>
+                <!-- Example action button -->
+                <button type="button" class="btn btn-primary">Acción</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <footer th:replace="~{layout/plantilla :: footer}"/>
 </body>
 </html>
