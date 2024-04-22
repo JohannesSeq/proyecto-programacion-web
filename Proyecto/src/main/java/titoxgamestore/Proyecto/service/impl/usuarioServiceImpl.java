@@ -34,33 +34,33 @@ public class usuarioServiceImpl implements usuarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public usuarios getUsuarioPorUsername(String username) {
-        return usuariosDao.findByUsername(username);
+    public usuarios getUsuarioPorUsuario(String usuario) {
+        return usuariosDao.findByUsuario(usuario);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public usuarios getUsuarioPorUsernameYPassword(String username, String password) {
-        return usuariosDao.findByUsernameAndPassword(username, password);
+    public usuarios getUsuarioPorUsuarioYPassword(String usuario, String password) {
+        return usuariosDao.findByUsuarioAndPassword(usuario, password);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public usuarios getUsuarioPorUsernameOCorreo(String username, String correo) {
-        return usuariosDao.findByUsernameOrCorreo(username, correo);
+    public usuarios getUsuarioPorUsuarioOCorreo(String usuario, String correo) {
+        return usuariosDao.findByUsuarioOrCorreo(usuario, correo);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public boolean existeUsuarioPorUsernameOCorreo(String username, String correo) {
-        return usuariosDao.existsByUsernameOrCorreo(username, correo);
+    public boolean existeUsuarioPorUsuarioOCorreo(String usuario, String correo) {
+        return usuariosDao.existsByUsuarioOrCorreo(usuario, correo);
     }
 
     @Override
     @Transactional
     public void save(usuarios usuario, boolean crearRolUser) {
-        usuario=usuariosDao.save(usuario);
-        if (crearRolUser) {  //Si se está creando el usuario, se crea el rol por defecto "USER"
+        usuario = usuariosDao.save(usuario);
+        if (crearRolUser) {  // If creating the user, create the default role "USER"
             rol Rol = new rol();
             Rol.setNombre("ROLE_USER");
             Rol.setIdUsuario(usuario.getIdUsuario());

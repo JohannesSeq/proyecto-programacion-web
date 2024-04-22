@@ -5,11 +5,11 @@ import titoxgamestore.Proyecto.domain.usuarios;
 
 public interface usuariosDao extends JpaRepository<usuarios, Long> {
 
-    usuarios findByUsername(String username);
+    usuarios findByUsuario(String usuario);
 
-    usuarios findByUsernameAndPassword(String username, String Password);
+    usuarios findByUsuarioAndPassword(String usuario, String password);
 
-    usuarios findByUsernameOrCorreo(String username, String correo);
+    usuarios findByUsuarioOrCorreo(String usuario, String correo);
 
-    boolean existsByUsernameOrCorreo(String username, String correo);
+    boolean existsByUsuarioOrCorreo(String usuario, String correo);
 }

@@ -6,28 +6,27 @@ import java.util.List;
 
 public interface usuarioService {
 
-    // Se obtiene un listado de usuarios en un List
-    public List<usuarios> getUsuarios();
+    // Retrieves a list of users
+    List<usuarios> getUsuarios();
 
-    // Se obtiene un Usuario, a partir del id de un usuario
-    public usuarios getUsuario(usuarios usuario);
+    // Retrieves a user based on user ID
+    usuarios getUsuario(usuarios usuario);
 
-    // Se obtiene un Usuario, a partir del username de un usuario
-    public usuarios getUsuarioPorUsername(String username);
+    // Retrieves a user based on username (now referred to by the 'usuario' field)
+    usuarios getUsuarioPorUsuario(String usuario);
 
-    // Se obtiene un Usuario, a partir del username y el password de un usuario
-    public usuarios getUsuarioPorUsernameYPassword(String username, String password);
+    // Retrieves a user based on username and password
+    usuarios getUsuarioPorUsuarioYPassword(String usuario, String password);
 
-    // Se obtiene un Usuario, a partir del username y el password de un usuario
-    public usuarios getUsuarioPorUsernameOCorreo(String username, String correo);
+    // Retrieves a user based on username or email
+    usuarios getUsuarioPorUsuarioOCorreo(String usuario, String correo);
 
-    // Se valida si existe un Usuario considerando el username
-    public boolean existeUsuarioPorUsernameOCorreo(String username, String correo);
+    // Checks if a user exists based on username or email
+    boolean existeUsuarioPorUsuarioOCorreo(String usuario, String correo);
 
-    // Se inserta un nuevo usuario si el id del usuario esta vacío
-    // Se actualiza un usuario si el id del usuario NO esta vacío
-    public void save(usuarios usuario,boolean crearRolUser);
+    // Inserts a new user if the user ID is empty, updates if not
+    void save(usuarios usuario, boolean crearRolUser);
 
-    // Se elimina el usuario que tiene el id pasado por parámetro
-    public void delete(usuarios usuario);
+    // Deletes a user based on ID
+    void delete(usuarios usuario);
 }
