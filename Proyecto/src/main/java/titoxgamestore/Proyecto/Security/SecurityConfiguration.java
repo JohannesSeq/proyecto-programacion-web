@@ -49,16 +49,35 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/","/index","/error/**",
-                                "/catalogo/**","/reparaciones/mostrarForm","/reportes/**",
-                                "/registro/**","/usuario/**","/login**","/scripts/**","/style/**","/webjars/**","/assets/**")
+                        .requestMatchers(
+                                "/",
+                                "/index",
+                                "/error/**",
+                                "/catalogo/**",
+                                "/reparaciones/mostrarForm",
+                                "/reparaciones/nuevo",
+                                "/reparaciones/guardar",
+                                "/reportes/**",
+                                "/registro/**",
+                                "/usuario/**",
+                                "/login**",
+                                "/scripts/**",
+                                "/style/**",
+                                "/webjars/**",
+                                "/assets/**")
                         .permitAll()
                         .requestMatchers(
                                 "/reparaciones/listaAdministrador",
-                                "/reparaciones/modifica",
+                                "/reparaciones/modificar/{reparacion_id}",
+                                "/reparaciones/eliminar/{reparacion_id}",
+                                "/catalogo/nuevo",
+                                "/catalogo/guardar",
+                                "/catalogo/modificar/{producto_id}",
+                                "/catalogo/eliminar/{producto_id}",
                                 "/producto/**"
                         ).hasRole("ADMIN")
                         .requestMatchers(
+                                "/reparaciones/mostrarForm",
                                 "/usuario/listadoReparaciones",
                                 "/reparaciones/porEmail",
                                 "/carrito/**")
