@@ -25,7 +25,6 @@ public class reparacionController {
         return "/reparaciones/listado";
     }
     
-    
     @GetMapping("/nuevo")
     public String reparacionNuevo(reparacion reparacion) {
         return "/reparaciones/modifica";

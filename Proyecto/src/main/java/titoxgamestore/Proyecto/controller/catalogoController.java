@@ -17,12 +17,12 @@ public class catalogoController {
     @Autowired
     private catalogoService catalogoService;
     
-    @GetMapping("/listado")
+    @GetMapping("/Catalogo")
     private String listado(Model model) {
         var catalogo = catalogoService.getcatalogo(false);
-        model.addAttribute("catalogo", catalogo);
-        model.addAttribute("totalcatalogo",catalogo.size());
-        return "/catalogo/listado";
+        model.addAttribute("catalogoItems", catalogo);
+        model.addAttribute("totalCatalogo",catalogo.size());
+        return "/catalogo/Catalogo";
     }
     
      @GetMapping("/nuevo")
@@ -33,13 +33,13 @@ public class catalogoController {
     @PostMapping("/guardar")
     public String CatalogoGuardar(catalogo catalogo) {
         catalogoService.save(catalogo);
-        return "redirect:/catalogo/listado";
+        return "redirect:/catalogo/Catalogo";
     }
 
     @GetMapping("/eliminar/{id_catalogo}")
     public String catalogoEliminar(catalogo catalogo) {
         catalogoService.delete(catalogo);
-        return "redirect:/catalogo/listado";
+        return "redirect:/catalogo/Catalogo";
     }
 
     @GetMapping("/modificar/{id_catalogo}")
