@@ -47,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
         var existe = false;
         for (Item i : listaItems) {
             ++posicion;
-            if (Objects.equals(i.getCantidad(), item.getCatalogoItem().getCantidad())) {
+            if (Objects.equals(i.getCatalogoItem().getId_catalogo(), item.getCatalogoItem().getId_catalogo())) {
                 existe = true;
                 break;
             }

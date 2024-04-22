@@ -22,6 +22,8 @@ public class reparacion implements Serializable{
     private long reparacion_id;
     private String nombre;
     private String apellido;
+
+    @Column(name = "correo_electronico")
     private String correo_electronico ;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

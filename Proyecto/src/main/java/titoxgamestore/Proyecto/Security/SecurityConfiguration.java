@@ -64,7 +64,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                 "/producto/listado",
                                 "/categoria/listado"
                         ).hasAnyRole("ADMIN", "VENDEDOR")
-                        .requestMatchers("/facturar/carrito")
+                        .requestMatchers("/facturar/carrito",
+                                "/carrito/**")
                         .hasRole("USER")
                 )
                 .formLogin((form) -> form

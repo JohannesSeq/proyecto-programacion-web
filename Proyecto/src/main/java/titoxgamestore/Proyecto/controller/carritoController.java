@@ -24,7 +24,7 @@ public class carritoController {
     private catalogoService CatalogoService;
 
     // View all items in the cart
-    @GetMapping("/")
+    @GetMapping("/carrito")
     private String listado(Model model) {
         var productos = CatalogoService.getcatalogo(false);
         model.addAttribute("productos", productos);
@@ -33,7 +33,7 @@ public class carritoController {
     }
 
     //Para ver el carrito
-    @GetMapping("/carrito/listado")
+    @GetMapping("/carrito/verCarrito")
     public String inicio(Model model) {
         var items = itemService.gets();
         model.addAttribute("items", items);
@@ -43,12 +43,12 @@ public class carritoController {
         }
         model.addAttribute("carritoTotal",
                 carritoTotalVenta);
-        return "/carrito/listado";
+        return "/carrito/verCarrito";
     }
 
     //Para Agregar un producto al carrito
     @GetMapping("/carrito/agregar/{idProducto}")
-    public ModelAndView agregarItem(Model model, Item item) {
+    public String agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         if (item2 == null) {
             catalogo producto = CatalogoService.getcatalogo(item.getCatalogoItem());
@@ -65,7 +65,7 @@ public class carritoController {
         model.addAttribute("listaItems", lista);
         model.addAttribute("listaTotal", totalCarritos);
         model.addAttribute("carritoTotal", carritoTotalVenta);
-        return new ModelAndView("/carrito/fragmentos :: verCarrito");
+        return "redirect:/catalogo/Catalogo";
     }
 
     //Para mofificar un producto del carrito
@@ -80,7 +80,7 @@ public class carritoController {
     @GetMapping("/carrito/eliminar/{idProducto}")
     public String eliminarItem(Item item) {
         itemService.delete(item);
-        return "redirect:/carrito/listado";
+        return "redirect:/carrito/verCarrito";
     }
 
     //Para actualizar un producto del carrito (cantidad)
