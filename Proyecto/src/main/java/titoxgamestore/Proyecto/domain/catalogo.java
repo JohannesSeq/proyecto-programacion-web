@@ -13,7 +13,7 @@ public class catalogo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_catalogo")
-    private long id_catalogo;
+    private Long id_catalogo;
     private String titulo;
     private String descripcion;
 

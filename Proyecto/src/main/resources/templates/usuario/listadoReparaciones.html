@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Lista de Reparaciones</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>Email</th>
+            <th>Fecha de Reparación</th>
+            <th>Detalles de la Reparación</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reparacion : ${reparaciones}">
+            <td th:text="${reparacion.nombre} + ' ' + ${reparacion.apellido}">Nombre Completo</td>
+            <td th:text="${reparacion.correoElectronico}">Email</td>
+            <td th:text="${#dates.format(reparacion.fecha, 'yyyy-MM-dd')}">Fecha</td>
+            <td th:text="${reparacion.Detalles_Reparacion}">Detalles</td>
+            <td>
+                <!-- Example action button -->
+                <button type="button" class="btn btn-primary">Acción</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

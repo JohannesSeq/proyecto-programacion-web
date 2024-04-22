@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>TITOX Store</title>
         <meta charset="UTF-8">
@@ -13,13 +13,13 @@
             <div id="carouselExample" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img th:src="@{/assets/img/gamer1.png}" class="d-block w-100" alt="...">
+                  <img th:src="@{/assets/img/gamer1.png}" class="d-block w-100 object-fit-cover" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img th:src="@{/assets/img/gamer2.png}" class="d-block w-100" alt="...">
+                  <img th:src="@{/assets/img/gamer2.png}" class="d-block w-100 object-fit-cover" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img th:src="@{/assets/img/gamer3.png}" class="d-block w-100" alt="...">
+                  <img th:src="@{/assets/img/gamer3.png}" class="d-block w-100 object-fit-cover" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -42,8 +42,8 @@
                             <h4 class="theme-color">Tienda de reparación de videojuegos</h4>
                             <p>En el corazón de la nostalgia y la pasión por los videojuegos, Titox Store emerge como tu destino predilecto para revivir las glorias del pasado y darles una nueva vida. Somos más que una tienda; somos una comunidad dedicada a preservar la magia de las consolas retro y a celebrar la evolución de los videojuegos.</p>
                             <div class="btn-bar">
-                                <a class="px-btn theme" href="catalogo/Catalogo.html">Ver catalogo de videojuevos</a>
-                                <a class="px-btn theme-t" href="reparaciones/FormReparaciones.html">Agenda una reparación</a>
+                                <a class="px-btn theme" th:href="@{/catalogo/Catalogo}">Ver catalogo de videojuevos</a>
+                                <a class="px-btn theme-t" th:href="@{/reparaciones/mostrarForm}">Agenda una reparación</a>
                             </div>
                         </div>
                     </div>

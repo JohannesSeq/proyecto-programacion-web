@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/plantilla :: head}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="../../static/style/main.css">
 </head>
 <body>
+
     <header th:replace="~{layout/plantilla :: header}"/>
+    <div th:if=${param.exito}>
+        <div class="alert alert-info">Se ha agregado un nuevo producto</div>
+    </div>
     <div class="container mt-4">
         <h1 class="mb-3">Catalogo de VideoJuegos</h1>
         <div class="row mb-3">
@@ -27,13 +31,17 @@
             </div>
         </div>
         <div id="catalogItems" class="row">
-            <div th:each="item : ${catalogoItems}" class="col-md-4 mb-4">
+            <div th:each="item : ${catalogoItems}" class="col-md-4 mb-4 mr-3">
                 <div class="card" style="width: 18rem;">
-                    <img th:src="@{${item.imagen_catalogo}}" class="card-img-top" alt="Card image cap">
-                    <div class="card-body">
+                    <img th:src="@{${item.imagen_catalogo}}" class="card-img-top" style="width: 290px; height: 150px;" alt="Card image cap">
+                    <div class="card-body" style="height: 230px">
                         <h5 class="card-title" th:text="${item.titulo}">Card title</h5>
+                        <h5 class="card-subtitle" th:text="'₡' + ${item.precio}">Card precio</h5>
                         <p class="card-text" th:text="${item.descripcion}">Some quick example text...</p>
-                        <a th:href="@{/product/details(item.id)}" class="btn btn-primary">Agregar al Carrito</a>
+                        <form th:action="@{/carrito/agregar/{idProducto}(idProducto=${item.id_catalogo})}" method="get">
+                            <input type="hidden" name="catalogoItem" th:value="${item.id_catalogo}" />
+                            <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -42,7 +50,11 @@
             </div>
         </div>
     </div>
-    <footer th:replace="~{layout/plantilla :: footer}"/>
+    <div class="container d-flex align-items-center justify-content-center mb-4 mt-4">
+        <a th:href="@{/carrito/verCarrito}" class="btn btn-secondary mt-2">Ver Carrito</a>
+    </div>
+    <div id="content-wrap"></div>
+        <footer id="footer" th:replace="~{layout/plantilla :: footer}"/>
     <script src="../../static/scripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
