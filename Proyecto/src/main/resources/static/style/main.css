@@ -16,9 +16,12 @@ footer {
 }
 
 .custom-carousel-container .carousel-inner img {
-    object-fit: cover !important; /* Ensures images cover their container. */
     height: 100%; /* This will make the image fill the container height. */
-    width: auto !important; /* This ensures the width is automatically adjusted while maintaining the aspect ratio. */
+}
+
+.imagenes {
+    width: 100%;
+    height: 500px;
 }
 
 @media (max-width: 991px) {

@@ -24,7 +24,7 @@ public class reparacion implements Serializable{
     private String apellido;
 
     @Column(name = "correo_electronico")
-    private String correo_electronico ;
+    private String correoElectronico;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
@@ -37,11 +37,11 @@ public class reparacion implements Serializable{
     
     
 
-    public reparacion(long reparacion_id,String nombre, String apellido, String correo_electronico, Date fecha, String Detalles_Reparacion, boolean activo) {
+    public reparacion(long reparacion_id,String nombre, String apellido, String correoElectronico, Date fecha, String Detalles_Reparacion, boolean activo) {
         this.reparacion_id = reparacion_id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.correo_electronico = correo_electronico;
+        this.correoElectronico = correoElectronico;
         this.fecha = fecha;
         this.Detalles_Reparacion = Detalles_Reparacion;
         this.activo = activo;

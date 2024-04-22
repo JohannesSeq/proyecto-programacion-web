@@ -8,7 +8,7 @@ public interface reparacionService {
 
     public List<reparacion> getreparacion(boolean activos);
 
-    public List<reparacion> getreparacionPorEmail(String correo_electronico);
+    public List<reparacion> getreparacionPorEmail(String correoElectronico);
 
     public reparacion getreparacion(reparacion reparacion);
     public void save(reparacion reparacion);

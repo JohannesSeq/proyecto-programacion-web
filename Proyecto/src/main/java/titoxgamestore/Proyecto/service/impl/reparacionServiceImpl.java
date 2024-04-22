@@ -30,8 +30,8 @@ public class reparacionServiceImpl implements reparacionService{
     }
     @Transactional(readOnly = true)
     @Override
-    public List<reparacion> getreparacionPorEmail(String correo_electronico) {
-        var lista = reparaciondao.findBycorreo_electronico(correo_electronico);
+    public List<reparacion> getreparacionPorEmail(String correoElectronico) {
+        var lista = reparaciondao.findByCorreoElectronico(correoElectronico);
         return lista;
     }
 
