@@ -1,6 +1,7 @@
 package titoxgamestore.Proyecto.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import titoxgamestore.Proyecto.dao.rolDao;
@@ -16,6 +17,10 @@ public class usuarioServiceImpl implements usuarioService {
 
     @Autowired
     private usuariosDao usuariosDao;
+
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private rolDao roldao;
@@ -59,10 +64,13 @@ public class usuarioServiceImpl implements usuarioService {
     @Override
     @Transactional
     public void save(usuarios usuario, boolean crearRolUser) {
+        if (usuario.getPassword() != null) {
+            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        }
         usuario = usuariosDao.save(usuario);
         if (crearRolUser) {
             rol Rol = new rol();
-            Rol.setNombre("USER");
+            Rol.setNombre("ROLE_USER");
             Rol.setIdUsuario(usuario.getIdUsuario());
             roldao.save(Rol);
         }

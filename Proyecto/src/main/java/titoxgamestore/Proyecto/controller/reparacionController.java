@@ -17,6 +17,11 @@ public class reparacionController {
     @Autowired
     private reparacionService reparacionservice;
 
+    @GetMapping("/mostrarForm")
+    public String mostrarForm() {
+        return "/reparaciones/FormReparaciones";
+    }
+
     @GetMapping("/listado")
     private String listado(Model model){
         var reparacion = reparacionservice.getreparacion(false);
@@ -33,8 +38,9 @@ public class reparacionController {
     
     @PostMapping("/guardar")
     public String reparacionGuardar(reparacion reparacion) {
+        reparacion.setActivo(true);
         reparacionservice.save(reparacion);
-        return "redirect:/reparaciones/listado";
+        return "redirect:/reparaciones/FormReparaciones";
     }
     
     

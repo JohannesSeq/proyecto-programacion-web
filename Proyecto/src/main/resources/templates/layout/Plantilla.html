@@ -28,7 +28,7 @@
                             <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/reparaciones/FormReparaciones}">Reparaciones</a>
+                            <a class="nav-link" th:href="@{/reparaciones/mostrarForm}">Reparaciones</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -51,8 +51,34 @@
                                 Usuario
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
-                                <li><a class="dropdown-item" th:href="@{/usuario/login}">Iniciar Sesión</a></li>
-                                <li><a class="dropdown-item" th:href="@{/registro/Registro}">Registrarse</a></li>
+                                <!-- Display these items only if the user is not authenticated -->
+                                <li sec:authorize="!isAuthenticated()">
+                                    <a class="dropdown-item" th:href="@{/login}">Iniciar Sesión</a>
+                                </li>
+                                <li sec:authorize="!isAuthenticated()">
+                                    <a class="dropdown-item" th:href="@{/registro/Registro}">Registrarse</a>
+                                </li>
+
+                                <!-- Display these items only if the user is authenticated and has the role 'USER' -->
+                                <li sec:authorize="isAuthenticated() and hasRole('USER')">
+                                    <a class="dropdown-item" th:href="@{/usuario/gestion}">Gestionar usuario</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() and hasRole('USER')">
+                                    <a class="dropdown-item" th:href="@{/reparaciones/ver}">Ver reparaciones</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() and hasRole('USER')">
+                                    <form method="post" th:action="@{/logout}">
+                                    <button class="dropdown-item">Cerrar Sesion</button>
+                                    </form>
+                                </li>
+
+                                <!-- Display these additional items only if the user is authenticated and has the role 'ADMIN' -->
+                                <li sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+                                    <a class="dropdown-item" th:href="@{/catalogo/gestionar}">Gestionar catalogo</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+                                    <a class="dropdown-item" th:href="@{/reparaciones/gestionar}">Gestionar reparaciones</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
